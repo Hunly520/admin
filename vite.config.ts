@@ -1,9 +1,15 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-const { resolve } = require('path')
+import { createHtmlPlugin } from 'vite-plugin-html'
+import { resolve } from 'path'
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(), 
+    createHtmlPlugin({
+      template: 'public/index.html',  // 手动指定html模板路径
+    })  
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src')
