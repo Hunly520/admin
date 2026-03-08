@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build"
+    "build": "npm run format && vue-tsc -b && vite build",
+    "format": "prettier --write \"src/**/*.{js,ts,vue,css,scss}\""
   },
   "dependencies": {
     "vue": "^3.5.25"
@@ -15,6 +16,7 @@
     "@vitejs/plugin-vue": "^6.0.2",
     "@vue/tsconfig": "^0.8.1",
     "path": "^0.12.7",
+    "prettier": "^3.5.0",
     "typescript": "~5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-html": "^3.2.2",
