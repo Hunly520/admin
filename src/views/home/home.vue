@@ -1,9 +1,12 @@
 <template>
   <div class="h-admin-home">
     <h1>Home Page</h1>
+    <HomeIcon style="width: 50px; height: 50px; margin-left: 20px" />
   </div>
 </template>
 <script setup lang="ts">
+  import HomeIcon from '@/assets/icons/home.svg'
+
   defineOptions({
     name: 'Home',
   })

@@ -1,6 +1,7 @@
 <template>
   <div class="h-admin-body">
-    <vue-router-view />
+    11111
+    <RouterView />
   </div>
 </template>
 <script setup lang="ts">
