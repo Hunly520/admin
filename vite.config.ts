@@ -18,6 +18,13 @@ export default defineConfig({
       '@': resolve(process.cwd(), 'src')
     }
   },
+  css: {
+    preprocessorOptions: {
+      less: {
+        additionalData: `@import "@/styles/variables.less";`
+      }
+    }
+  },
   server: {
     port: 9999,
     open: true,

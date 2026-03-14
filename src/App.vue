@@ -1,6 +1,5 @@
 <template>
   <div class="h-admin-body">
-    11111
     <RouterView />
   </div>
 </template>

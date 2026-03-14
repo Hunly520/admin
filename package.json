@@ -26,6 +26,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-vue": "^9.33.0",
     "globals": "^17.4.0",
+    "less": "^4.6.4",
     "path": "^0.12.7",
     "prettier": "^3.5.0",
     "typescript": "~5.9.3",

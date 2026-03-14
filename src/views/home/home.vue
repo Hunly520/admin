@@ -11,7 +11,7 @@
     name: 'Home',
   })
 </script>
-<style scoped>
+<style scoped lang="less">
   .h-admin-home {
     display: flex;
     justify-content: center;
@@ -20,7 +20,7 @@
     background-color: #f0f2f5;
   }
   .h-admin-home h1 {
-    font-size: 2rem;
+    font-size: @primary-font-size;
     color: #333;
   }
 </style>
