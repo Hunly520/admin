@@ -32,6 +32,7 @@
 
 <script setup lang="ts">
 import { reactive } from 'vue'
+import { login } from '@/api/login'
 
 defineOptions({
   name: 'Login',
@@ -42,9 +43,12 @@ const form = reactive({
   password: '',
 })
 
-function onSubmit() {
-  // TODO: replace with real auth logic
-  console.log('login', { username: form.username, password: form.password })
+const onSubmit = async () => {
+  const { username, password } = form
+  const res = await login(username, password)
+  if(res) {
+    console.log(res);
+  }
 }
 </script>
 

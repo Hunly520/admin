@@ -1,8 +1,9 @@
 import axios from 'axios'
+import type { RequestConfig } from '@/types';
 
 // 创建axios 实例
-const request = axios.create({
-  baseURL: '/api',
+const instance = axios.create({
+  baseURL: '/api/v1',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json'
@@ -11,14 +12,30 @@ const request = axios.create({
 })
 
 
-request.interceptors.request.use((config) => {
+// 请求拦截器
+instance.interceptors.request.use((config) => {
   return config;
 }, (error) => {
   return Promise.reject(error);
 });
 
-request.interceptors.response.use((response) => {
+
+// 响应拦截器
+instance.interceptors.response.use((response) => {
   return response.data; 
 }, (error) => {
   return Promise.reject(error);
 });
+
+
+const request = (config: RequestConfig) => {
+  const { url, method, data, params } = config;
+  return instance.request({
+    url,
+    method,
+    data,
+    params
+  });
+}
+
+export default request;
