@@ -1,14 +1,17 @@
 /**
  * 接口请求参数
  * @interface RequestConfig
- * @property {string} url - 请求的URL地址
- * @property {string} method - 请求方法（GET, POST, PUT, DELETE等）
- * @property {any} [data] - 请求体数据（适用于POST, PUT等方法）
- * @property {any} [params] - URL参数（适用于GET方法）
  */
 export interface RequestConfig {
+  // 请求的URL地址
   url: string;
+
+  // 请求方法(GET, POST, PUT, DELETE等)
   method: string;
-  data?: any;
-  params?: any;
+
+  // 请求体数据(适用于POST, PUT等方法)
+  data?: Record<string, unknown>;
+
+  // URL参数(适用于GET方法)
+  params?: Record<string, unknown>;
 }

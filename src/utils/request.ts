@@ -1,5 +1,6 @@
-import axios from 'axios'
+import axios, { type InternalAxiosRequestConfig } from 'axios'
 import type { RequestConfig } from '@/types';
+import { getToken } from './auth';
 
 // 创建axios 实例
 const instance = axios.create({
@@ -13,7 +14,12 @@ const instance = axios.create({
 
 
 // 请求拦截器
-instance.interceptors.request.use((config) => {
+instance.interceptors.request.use((config: InternalAxiosRequestConfig<RequestConfig>) => {
+  const token = getToken();
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`;
+  }
+
   return config;
 }, (error) => {
   return Promise.reject(error);
@@ -30,6 +36,7 @@ instance.interceptors.response.use((response) => {
 
 const request = (config: RequestConfig) => {
   const { url, method, data, params } = config;
+
   return instance.request({
     url,
     method,

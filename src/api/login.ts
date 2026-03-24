@@ -1,9 +1,13 @@
 import request from "@/utils/request";
 
-
-export const login = async (username: string, password: string) => {
-  return request.post('/auth/login', {
-    username,
-    password
-  });
+export const login = (username: string, password: string) => {
+  const params = {
+    url: '/auth/login',
+    method: 'POST',
+    data: {
+      username,
+      password
+    }
+  };
+  return request(params);
 }
