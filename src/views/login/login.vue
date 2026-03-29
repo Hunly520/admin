@@ -25,13 +25,27 @@
         />
       </div>
 
+      <div class="form-row rememberMe-row">
+        <label>
+          <input
+            type="checkbox"
+            v-model="form.rememberMe"
+          />
+          记住密码
+        </label>
+      </div>
+
       <button type="submit" class="submit-btn">登录</button>
+      <div class="register-link">
+        还没有账号？
+        <a href="/register">立即注册</a>
+      </div>
     </form>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 import { login } from '@/api/login'
 
 defineOptions({
@@ -41,10 +55,26 @@ defineOptions({
 const form = reactive({
   username: '',
   password: '',
+  rememberMe: false,
+})
+
+onMounted(() => {
+  const saved = localStorage.getItem('login-rememberMe')
+  if (saved) {
+    const data = JSON.parse(saved)
+    form.username = data.username || ''
+    form.password = data.password || ''
+    form.rememberMe = true
+  }
 })
 
 const onSubmit = async () => {
-  const { username, password } = form
+  const { username, password, rememberMe } = form
+  if (rememberMe) {
+    localStorage.setItem('login-rememberMe', JSON.stringify({ username, password }))
+  } else {
+    localStorage.removeItem('login-rememberMe')
+  }
   const res = await login(username, password)
   if(res) {
     console.log(res);
@@ -85,12 +115,19 @@ const onSubmit = async () => {
     gap: 8px;
   }
 
+  .rememberMe-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
   .form-row label {
     font-size: 0.9rem;
     color: #4b5563;
   }
 
-  .form-row input {
+  .form-row input[type="text"],
+  .form-row input[type="password"] {
     height: 44px;
     padding: 0 12px;
     border: 1px solid #d1d5db;
@@ -117,5 +154,20 @@ const onSubmit = async () => {
 
   .submit-btn:hover {
     background: #1d4ed8;
+  }
+
+  .register-link {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: #6b7280;
+  }
+  .register-link a {
+    color: #2563eb;
+    text-decoration: none;
+    margin-left: 4px;
+  }
+  .register-link a:hover {
+    text-decoration: underline;
   }
 </style>

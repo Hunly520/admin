@@ -4,7 +4,7 @@ import { getToken } from './auth';
 
 // 创建axios 实例
 const instance = axios.create({
-  baseURL: '/api/v1',
+  baseURL: '/api',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json'
@@ -15,6 +15,7 @@ const instance = axios.create({
 
 // 请求拦截器
 instance.interceptors.request.use((config: InternalAxiosRequestConfig<RequestConfig>) => {
+  console.log(config, '请求拦截器:config')
   const token = getToken();
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
@@ -36,7 +37,7 @@ instance.interceptors.response.use((response) => {
 
 const request = (config: RequestConfig) => {
   const { url, method, data, params } = config;
-
+  console.log(config, 'config')
   return instance.request({
     url,
     method,
